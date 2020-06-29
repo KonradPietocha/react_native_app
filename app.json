@@ -1,0 +1,12 @@
+{
+  "name": "my-mobile-app",
+  "displayName": "my-mobile-app",
+  "expo": {
+    "name": "my-mobile-app",
+    "slug": "my-mobile-app",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
