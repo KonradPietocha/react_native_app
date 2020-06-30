@@ -7,6 +7,10 @@
     "version": "1.0.0",
     "assetBundlePatterns": [
       "**/*"
-    ]
+    ],
+    "androidStatusBar": {
+      "backgroundColor": "#C2185B",
+      "translucent": false
+    }
   }
 }
