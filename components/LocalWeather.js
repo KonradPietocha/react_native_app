@@ -2,6 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, Platform, TextInput } from 'react-native';
 import Forecast from './Forecast';
+import WeatherMap from './WeatherMap';
 
 export default function LocalWeather() {
     const [state, setState] = useState({
@@ -9,6 +10,11 @@ export default function LocalWeather() {
         forecast: null
     });
     const handleTextChange = event => {
+        let code = event.nativeEvent.text;
+        WeatherMap.getWeather(code).then(forecast => {
+            console.log(forecast);
+            setState(state => ({ ...state, forecast: forecast }));
+        });
         setState(state => ({ ...state, code: event.nativeEvent.text }));
     };
     let content = null;
