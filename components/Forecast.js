@@ -8,10 +8,10 @@ export default function Forecast(props) {
                 {props.main}
             </Text>
             <Text style={styles.mainText}>
-                Current situation: {props.description}
+                Warunki: {props.description}
             </Text>
             <Text style={styles.bigText}>
-                {props.temp}&#8451;
+                {parseInt(props.temp)}&#8451;
             </Text>
         </View>
     );

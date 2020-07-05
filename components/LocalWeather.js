@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Platform, TextInput } from 'react-native';
+import { StyleSheet, Text, View, Platform, TextInput, ImageBackground } from 'react-native';
 import Forecast from './Forecast';
 import WeatherMap from './WeatherMap';
 
@@ -20,7 +20,7 @@ export default function LocalWeather() {
     let content = null;
     if (state.forecast !== null) {
         content = (
-            <Forecast 
+            <Forecast
                 main={state.forecast.main}
                 description={state.forecast.description}
                 temp={state.forecast.temp}
@@ -29,46 +29,80 @@ export default function LocalWeather() {
     };
     return (
         <View style={styles.container}>
-            <Text style={styles.welcome}>
-                You entered {state.code}.
-            </Text>
-            {content}
-            <TextInput 
-                style={styles.input}
-                onSubmitEditing={handleTextChange}
-            />
-            <Text style={styles.instructions}>
-                {instructions}
-            </Text>
-            <StatusBar style="auto" />
+            <ImageBackground
+                source={require('./img/kwiaty.png')}
+                resizeMode="cover"
+                style={styles.background}
+            >
+                <View style={styles.overlay}>
+                    <View style={styles.textLine}>
+                        <Text style={styles.mainText}>
+                            {state.code === "" ?
+                                "Wpisz swój kod pocztowy"
+                                :
+                                "Bieżąca pogoda dla"
+                            }
+                        </Text>
+                        <View style={styles.codeContainer}>
+                            <TextInput
+                                style={[styles.postCode, styles.inputText]}
+                                onSubmitEditing={handleTextChange}
+                                underlineColorAndroid="transparent"
+                            />
+                        </View>
+                        <Text style={styles.instructions}>
+                            {instructions}
+                        </Text>
+                        <StatusBar style="auto" />
+                    </View>
+                    {content}
+                </View>
+            </ImageBackground>
         </View>
     );
 }
 
+const baseFontSize = 16;
 const styles = StyleSheet.create({
     container: {
+        flex: 1
+    },
+    background: {
         flex: 1,
-        backgroundColor: '#9acd32',
+        flexDirection: 'column'
+    },
+    overlay: {
+        paddingTop: 5,
+        backgroundColor: '#000000',
+        opacity: 0.5,
+        flexDirection: "column",
+        alignItems: "center"
+    },
+    textLine: {
+        flexDirection: 'column',
         alignItems: 'center',
-        justifyContent: 'center',
+        padding: 30
     },
-    welcome: {
-        fontSize: 20,
-        textAlign: 'center',
-        margin: 10
+    codeContainer: {
+        height: (baseFontSize + 25),
+        borderBottomColor: '#DDDDDD',
+        borderBottomWidth: 1,
+        marginLeft: 5,
+        marginTop: -6
     },
-    instructions: {
-        textAlign: 'center',
-        color: '#333333',
-        marginBottom: 5
+    postCode: {
+        flex: 1,
+        flexBasis: 1,
+        width: 60
     },
-    input: {
-        fontSize: 20,
-        borderWidth: 2,
-        padding: 2,
-        height: 40,
-        width: 100,
-        textAlign: 'center'
+    mainText: {
+        fontSize: baseFontSize,
+        color: '#FFFFFF',
+        marginBottom: 15
+    },
+    inputText: {
+        fontSize: baseFontSize,
+        color: '#FFFFFF'
     }
 });
 
